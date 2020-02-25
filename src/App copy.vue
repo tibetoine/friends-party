@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <nav-bar></nav-bar>
+    <div class="main-wrapper">
+      <router-view />
+    </div>
+
     <new-content-available-toastr
       v-if="newContentAvailable"
       class="new-content-available-toastr"
@@ -12,11 +17,6 @@
       @close="closeAddToHomeScreenModalForApple(false)"
     >
     </apple-add-to-home-screen-modal>
-    <v-app>
-      <nav-bar></nav-bar>
-
-      <router-view></router-view>
-    </v-app>
   </div>
 </template>
 <script>

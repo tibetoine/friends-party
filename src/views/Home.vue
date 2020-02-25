@@ -1,7 +1,11 @@
 <template>
   <div class="page-wrapper">
     <h1 class="home-page-title">{{ appTitle }}</h1>
-    <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
+    <img
+      alt="logo-friends-party"
+      class="logo"
+      src="@/assets/img/friends-party-screen-splash.jpg"
+    />
 
     <a
       rel="noopener"
