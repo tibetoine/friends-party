@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navbar">
     <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
         <template v-for="item in items">
@@ -25,7 +25,6 @@
           src="@/assets/img/bento-starter.svg"
         />
         <span class="site-name title-desktop">{{ appTitle }}</span>
-        <span class="site-name title-mobile">{{ appShortTitle }}</span>
       </router-link>
       <v-spacer></v-spacer>
       <div class="links">
@@ -68,28 +67,9 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      { icon: 'not_listed_location', text: 'C où?', path: '/where' },
-      { icon: 'restaurant', text: 'Menus', path: '/menus' },
-      {
-        icon: 'local_grocery_store',
-        text: 'Les courses',
-        path: '/shopping'
-      },
+      { icon: 'emoji_events', text: 'Défis', path: '/challenge' },
+      { icon: 'weekend', text: 'Cocooning', path: '/cocooning' },
       { icon: 'forum', text: 'Blabla...', path: '/discuss' },
-      {
-        icon: 'add_a_photo',
-        text: 'On partage tout',
-        path: '/sharing'
-      },
-      { icon: 'attach_money', text: 'Les sous', path: '/money' },
-      { icon: 'person_add', text: 'Invités', path: '/guests' },
-      {
-        icon: 'assignment',
-        text: 'Qui ramène quoi?',
-        path: '/taking'
-      },
-      { icon: 'beach_access', text: 'Activités', path: '/activies' },
-      { icon: 'hotel', text: 'On dort où?', path: '/sleeping' },
       { icon: 'help', text: 'Aide', path: '/help' }
     ]
   }),
@@ -105,6 +85,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .logo {
+    height : 24px;
+  }
+</style>
 
 <style lang="scss" scoped>
 @import '@/theme/variables.scss';
@@ -154,7 +140,7 @@ export default {
   .site-name {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #fff;
     position: relative;
   }
 
@@ -193,7 +179,7 @@ export default {
           font-size: 0.9rem;
           text-decoration: none;
           color: $navbar-link-color;
-          border-color: #2c3e50;
+          border-color: #fff;
           line-height: 1.4rem;
           display: inline-block;
           cursor: pointer;
