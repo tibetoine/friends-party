@@ -60,6 +60,7 @@
 
 <script>
 import firebase from 'firebase/app'
+
 import { mapGetters, mapState } from 'vuex'
 
 export default {
@@ -87,9 +88,9 @@ export default {
 </script>
 
 <style scoped>
-  .logo {
-    height : 24px;
-  }
+.logo {
+  height: 24px;
+}
 </style>
 
 <style lang="scss" scoped>
