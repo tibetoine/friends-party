@@ -8,7 +8,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "bundlesize": "bundlesize",
-    "firebase:deploy:ci": "firebase deploy --non-interactive --token \"1//03Wh9rR6Q4WQMCgYIARAAGAMSNwF-L9IrayOwkDUdnEjuU5JPvYr7U9m6-GS5KFpIkXMsC9nA9qvq3R0RMwG8KH0SFgJqTXooY8w\"",
+    "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
     "prettier:check": "prettier \"**/*.{vue,scss,sass,js,json}\" --list-different",
     "prettier:format-all": "prettier --write \"**/*.{vue,scss,sass,js,json}\"",
     "test:e2e:headless": "vue-cli-service test:e2e --headless"
