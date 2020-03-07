@@ -21,6 +21,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  computed: mapState('app', ['appTitle']),
   head() {
     return {
       title: {
@@ -34,8 +35,7 @@ export default {
         }
       ]
     }
-  },
-  computed: mapState('app', ['appTitle'])
+  }
 }
 </script>
 
