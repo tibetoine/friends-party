@@ -61,11 +61,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-            - v2-deps-{{ checksum "package-lock.json" }}
-            - v2-deps
+          at: .      
       - run:
           name: 'Run e2e tests'
           command: npm run test:e2e:headless
