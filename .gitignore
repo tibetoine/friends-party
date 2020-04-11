@@ -24,3 +24,6 @@ firebase-debug.log
 *.njsproj
 *.sln
 *.sw*
+
+#history
+.history/**/*

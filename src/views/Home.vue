@@ -7,13 +7,7 @@
       src="@/assets/img/friends-party-screen-splash.jpg"
     />
 
-    <a
-      rel="noopener"
-      class="documentation-link"
-      target="_blank"
-      href="https://bento-starter.netlify.com/"
-      >Documentation →</a
-    >
+    <p>Prout</p>
   </div>
 </template>
 
