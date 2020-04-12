@@ -11,7 +11,7 @@
     "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
     "prettier:check": "prettier \"**/*.{vue,scss,sass,js,json}\" --list-different",
     "prettier:format-all": "prettier --write \"**/*.{vue,scss,sass,js,json}\"",
-    "test:e2e:headless": "vue-cli-service test:e2e --headless --browser chrome"
+    "test:e2e:headless": "vue-cli-service test:e2e --headless"
   },
   "dependencies": {
     "core-js": "^3.6.5",
