@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:10.16.3
 
 jobs:
   install-dependencies:
@@ -61,7 +61,7 @@ jobs:
     executor: default-executor
     steps:
       - attach_workspace:
-          at: .      
+          at: .
       - run:
           name: 'Run e2e tests'
           command: npm run test:e2e:headless
