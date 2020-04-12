@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: cypress/browsers:node12.16.1-chrome80-ff73
+      - image: cypress/base:10
 
 jobs:
   install-dependencies:
