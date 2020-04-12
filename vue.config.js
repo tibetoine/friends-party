@@ -7,5 +7,6 @@ module.exports = {
       swSrc: 'public\\service-worker.js'
     }
   },
-  transpileDependencies: ['vuetify']
+  transpileDependencies: ['vuetify'],
+  parallel: !process.env.NODE_ENV === 'production'
 }
