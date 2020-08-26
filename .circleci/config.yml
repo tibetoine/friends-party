@@ -113,15 +113,11 @@ workflows:
       - run-unit-tests:
           requires:
             - install-dependencies
-      - run-e2e-tests:
-          requires:
-            - run-unit-tests
       - build:
           requires:
             - check-prettier
             - check-linter
             - run-unit-tests
-            - run-e2e-tests
       - check-bundles-sizes:
           requires:
             - build
