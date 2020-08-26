@@ -104,9 +104,6 @@ workflows:
   build-and-deploy:
     jobs:
       - install-dependencies
-      - check-prettier:
-          requires:
-            - install-dependencies
       - check-linter:
           requires:
             - install-dependencies
@@ -115,7 +112,6 @@ workflows:
             - install-dependencies
       - build:
           requires:
-            - check-prettier
             - check-linter
             - run-unit-tests
       - check-bundles-sizes:

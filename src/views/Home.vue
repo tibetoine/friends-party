@@ -58,7 +58,7 @@ export default {
         inner: 'Home'
       },
       meta: [
-        {   
+        {
           name: 'description',
           content: `${this.appTitle} home page`,
           id: 'desc'
