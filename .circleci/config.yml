@@ -4,20 +4,35 @@ executors:
   default-executor:
     docker:
       - image: cypress/base:10
+
 jobs:
   install-dependencies:
     executor: default-executor
     steps:
       - checkout
+
+      - run:
+          name: 'Install dependencies'
+          command: npm ci
+
+      - persist_to_workspace:
+          root: .
+          paths: .
+
   build:
     executor: default-executor
     steps:
+      - attach_workspace:
+          at: .
       - run:
           name: 'Build'
           command: npm run build
-# Orchestrate our job run sequence
+      - persist_to_workspace:
+          root: .
+          paths: .
 workflows:
-  build_and_test:
+  version: 2
+  build-and-deploy:
     jobs:
       - install-dependencies
       - build
