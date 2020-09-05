@@ -11,13 +11,60 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - v2-deps-{{ checksum "package-lock.json" }}
+            - v2-deps
+
       - run:
           name: 'Install dependencies'
           command: npm ci
 
+      - save_cache:
+          paths:
+            - ~/.npm
+            - ~/.cache
+          key: v2-deps-{{ checksum "package-lock.json" }}
+
       - persist_to_workspace:
           root: .
           paths: .
+
+  check-prettier:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Run prettier check on project files'
+          command: npm run prettier:check
+
+  check-linter:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Run linter'
+          command: npm run lint
+
+  run-unit-tests:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Run unit tests'
+          command: npm run test:unit
+
+  run-e2e-tests:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Run e2e tests'
+          command: npm run test:e2e:headless
 
   build:
     executor: default-executor
@@ -30,9 +77,46 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
+
+  check-bundles-sizes:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Check bundles sizes'
+          command: npm run bundlesize
+
+  deploy:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Firebase deploy'
+          command: |
+            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
+              npm run firebase:deploy:ci
+            fi
+
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - install-dependencies
-      - build
+      - check-linter:
+          requires:
+            - install-dependencies
+      - run-unit-tests:
+          requires:
+            - install-dependencies
+      - build:
+          requires:
+            - check-linter
+            - run-unit-tests
+      - check-bundles-sizes:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - check-bundles-sizes
