@@ -3,6 +3,5 @@ orbs:
   node: circleci/node@3.0.0
 workflows:
   version: 2
-  build-and-deploy:
-    jobs:
-      - build
+  jobs:
+    - build
