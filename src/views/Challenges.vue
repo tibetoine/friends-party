@@ -128,7 +128,6 @@ export default {
         avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
       }
       for (let index = 0; index < this.users.length; index += 1) {
-        console.log(num)
         if (num === this.users[index].userId) {
           returnUser = this.users[index]
         }
