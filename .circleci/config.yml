@@ -11,20 +11,9 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v2-deps-{{ checksum "package-lock.json" }}
-            - v2-deps
-
       - run:
           name: 'Install dependencies'
           command: npm ci
-
-      - save_cache:
-          paths:
-            - ~/.npm
-            - ~/.cache
-          key: v2-deps-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: .
