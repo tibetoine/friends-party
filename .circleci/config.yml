@@ -1,11 +1,21 @@
 version: 2.1
 
+executors:
+  default-executor:
+    docker:
+      - image: cypress/base:10
 jobs:
   build:
-    docker:
-      - image: circleci/node@3.0.0
+    executor: default-executor
     steps:
-      - run: echo "this is the build job"
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Build'
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths: .
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
