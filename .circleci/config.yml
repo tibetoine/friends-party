@@ -5,6 +5,10 @@ executors:
     docker:
       - image: cypress/base:10
 jobs:
+  install-dependencies:
+    executor: default-executor
+    steps:
+      - checkout
   build:
     executor: default-executor
     steps:
@@ -15,4 +19,5 @@ jobs:
 workflows:
   build_and_test:
     jobs:
+      - install-dependencies
       - build
