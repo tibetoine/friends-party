@@ -14,6 +14,28 @@
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
 
+            <!-- Simon Essai d'ajout de bouton pour ajouter un défi -->
+
+            <v-btn class="mx-2" fab dark color="indigo" @click="challengeform = !challengeform">
+              <v-icon dark>mdi-plus</v-icon>
+            </v-btn>
+
+            <v-dialog v-model="challengeform" max-width="500px">
+              <v-card>
+                <v-card-text>
+                  <v-text-field label="File name"></v-text-field>
+
+                  <small class="grey--text">* This doesn't actually save.</small>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn text color="primary" @click="challengeform = false">Submit</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
             <v-btn icon>
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
@@ -25,9 +47,7 @@
               @click="goToChallenge"
             >
               <v-list-item-icon>
-                <v-icon v-if="challenge.favorite" color="amber darken-1"
-                  >mdi-star</v-icon
-                >
+                <v-icon v-if="challenge.favorite" color="amber darken-1">mdi-star</v-icon>
                 <v-icon v-else>mdi-star</v-icon>
               </v-list-item-icon>
 
@@ -36,19 +56,18 @@
               </v-list-item-content>
 
               <div v-if="challenge.doneBy && challenge.doneBy.length <= 3">
-                <v-list-item-avatar
-                  v-for="(user, index2) in challenge.doneBy"
-                  :key="index2"
-                >
+                <v-list-item-avatar v-for="(user, index2) in challenge.doneBy" :key="index2">
                   <v-img :src="getUser(user).avatar"></v-img>
                 </v-list-item-avatar>
               </div>
               <div v-if="challenge.doneBy && challenge.doneBy.length > 3">
                 <v-badge overlap right>
                   <template v-slot:badge>
-                    <span v-if="challenge.doneBy">{{
+                    <span v-if="challenge.doneBy">
+                      {{
                       challenge.doneBy.length
-                    }}</span>
+                      }}
+                    </span>
                   </template>
                   <v-avatar size="36">
                     <v-img :src="getUser(challenge.doneBy[0]).avatar"></v-img>
@@ -66,6 +85,7 @@
 <script>
 export default {
   data: () => ({
+    challengeform: false,
     challenges: [
       {
         name: 'Les 1000 kms',
@@ -119,8 +139,16 @@ export default {
   methods: {
     goToChallenge(challenge) {
       console.log('TODO goToChallenge ', challenge)
-      alert('todo')
+      alert('Todo')
     },
+
+    /* Simon Essai d'ajout de bouton pour ajouter un défi */
+
+    /* goToAddChallenge(challenge) {
+      console.log('TODO goToAddChallenge ', challenge)
+      alert(`Ajouter un formulaire d'ajout de challenge`)
+    }, */
+
     getUser(num) {
       let returnUser = {
         userId: 0,
@@ -137,6 +165,7 @@ export default {
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 @import '@/theme/variables.scss';
