@@ -1,19 +1,21 @@
 <template>
-  <div class="product-action-bar">
-    <input
-      placeholder="product name..."
-      class="product-name-input"
-      type="text"
-      :value="productNameToCreate"
-      @input="setProductNameToCreate($event.target.value)"
-      @keypress.enter="triggerAddProductAction"
-    />
-    <div
-      :class="{ disabled: productCreationPending }"
-      class="create-product-btn"
-      @click="triggerAddProductAction"
-    >
-      add product
+  <div>
+    <div class="challenge-action-bar">
+      <input
+        placeholder="challenge name..."
+        class="challenge-name-input"
+        type="text"
+        :value="challengeNameToCreate"
+        @input="setChallengeNameToCreate($event.target.value)"
+        @keypress.enter="triggerAddChallengeAction"
+      />
+      <div
+        :class="{ disabled: challengeCreationPending }"
+        class="create-challenge-btn"
+        @click="triggerAddChallengeAction"
+      >
+        add challenge
+      </div>
     </div>
   </div>
 </template>
@@ -22,16 +24,13 @@
 import { mapMutations, mapState, mapActions } from 'vuex'
 
 export default {
-  computed: mapState('products', [
-    'productNameToCreate',
-    'productCreationPending'
+  computed: mapState('challenges', [
+    'challengeNameToCreate',
+    'challengeCreationPending'
   ]),
   methods: {
-    ...mapMutations('products', ['setProductNameToCreate']),
-    ...mapActions('products', ['triggerAddProductAction']),
-    myMethod() {
-      console.log("ajout d'un truc")
-    }
+    ...mapMutations('challenges', ['setChallengeNameToCreate']),
+    ...mapActions('challenges', ['triggerAddChallengeAction'])
   }
 }
 </script>
@@ -39,12 +38,12 @@ export default {
 <style lang="scss" scoped>
 @import '@/theme/variables.scss';
 
-.product-action-bar {
+.challenge-action-bar {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .product-name-input {
+  .challenge-name-input {
     padding-left: 5px;
     height: 30px;
     width: 150px;
@@ -55,7 +54,7 @@ export default {
     border-radius: 3px;
   }
 
-  .create-product-btn {
+  .create-challenge-btn {
     cursor: pointer;
     padding: 5px 10px;
     border: 1px solid;

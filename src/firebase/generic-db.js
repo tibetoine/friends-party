@@ -14,7 +14,9 @@ export default class GenericDB {
    * @param id
    */
   async create(data, id = null) {
+    console.log('sdfsdfkjhsdfkjdshfkjsdhf')
     const collectionRef = (await firestore()).collection(this.collectionPath)
+    console.log(collectionRef)
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp()
 
     const dataToCreate = {
@@ -22,6 +24,8 @@ export default class GenericDB {
       createTimestamp: serverTimestamp,
       updateTimestamp: serverTimestamp
     }
+
+    console.log(dataToCreate)
 
     const createPromise = isNil(id)
       ? // Create doc with generated id
@@ -34,6 +38,7 @@ export default class GenericDB {
 
     const docId = await createPromise
 
+    console.log(docId)
     return {
       id: docId,
       ...data,
