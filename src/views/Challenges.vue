@@ -22,12 +22,50 @@
             </v-btn>
             <v-dialog v-model="challengeform" max-width="500px">
               <v-card>
-                <v-card-text>
-                  <v-text-field label="File name"></v-text-field>
-                  <small class="grey--text"
-                    >* This doesn't actually save.</small
+                <v-container fluid>
+                  <v-text-field label="Titre du défi"></v-text-field>
+
+                  <v-textarea
+                    name="input"
+                    label="Description du défi"
+                    value="Mais c'est complétement GUEDIN !"
+                    hint="Décrivez le défi"
+                  ></v-textarea>
+
+                  <v-file-input
+                    accept="image/*"
+                    small-chips
+                    show-size
+                    multiple
+                    placeholder="Téléchargez vos photos pour illustrer le défi"
+                    label="Photos"
+                    prepend-icon="mdi-camera"
+                  ></v-file-input>
+
+                  <v-subheader>Pondération du défi</v-subheader>
+                  <v-slider
+                    v-model="slider"
+                    :thumb-size="24"
+                    thumb-label="always"
+                    class="align-center"
+                    :max="5"
+                    :min="0"
+                    hide-details
+                  ></v-slider>
+
+                  <v-subheader
+                    >Critères de réussite du défi (1 minimum, 4
+                    maximum)</v-subheader
                   >
-                </v-card-text>
+                  <v-text-field
+                    label="Critère 1"
+                    :rules="criteremini"
+                  ></v-text-field>
+                  <v-text-field label="Critère 2"></v-text-field>
+                  <v-text-field label="Critère 3"></v-text-field>
+                  <v-text-field label="Critère 4"></v-text-field>
+                </v-container>
+
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="challengeform = false"
@@ -92,6 +130,10 @@ export default {
   components: { AddChallenge },
 
   data: () => ({
+    criteremini: [
+      value => !!value || 'Requis.',
+      value => (value && value.length >= 3) || 'Min 3 caractères'
+    ],
     challengeform: false,
     challenges: [
       {
