@@ -1,5 +1,5 @@
 export default {
-  challenges: null,
+  challenges: [],
   challengeNameToCreate: '',
   challengeDeletionPending: [],
   challengeCreationPending: false
