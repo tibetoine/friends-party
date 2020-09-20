@@ -20,7 +20,12 @@ export default {
   triggerAddChallengeAction: ({ dispatch, state, commit }) => {
     if (state.challengeNameToCreate === '') return
 
-    const challenge = { name: state.challengeNameToCreate }
+    const challenge = { name: state.challengeNameToCreate, 
+      definition: state.challengeDefinition, 
+      pic: state.challengePic,
+      weight: state.challengeWeight,
+      achievement: state.challengeAchievement,
+      }
     console.log('challenge is : ', challenge)
     commit('setChallengeNameToCreate', '')
     dispatch('createChallenge', challenge)

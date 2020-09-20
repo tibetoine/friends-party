@@ -50,7 +50,7 @@ export default {
     outline: none;
     font: inherit;
     border: 1px solid;
-    border-color: #2c3e50;
+    border-color:red;
     border-radius: 3px;
   }
 

@@ -1,0 +1,24 @@
+{
+    "panier": {
+        "fruit": [
+            {
+                "name": "banane",
+                "quantite": 3
+            },
+            {
+                "name": "figue",
+                "quantite": 4
+            }
+        ],
+        "legume": [
+            {
+                "name": "carotte",
+                "quantite": 1
+            },
+            {
+                "name": "patate",
+                "quantite": 6
+            }
+        ]
+    }
+}
