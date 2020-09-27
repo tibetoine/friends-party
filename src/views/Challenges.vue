@@ -11,13 +11,7 @@
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
             <!-- Simon Essai d'ajout de bouton pour ajouter un défi -->
-            <v-btn
-              class="mx-2"
-              fab
-              dark
-              color="indigo"
-              @click="challengeform = !challengeform"
-            >
+            <v-btn class="mx-2" fab dark color="indigo" @click="challengeform = !challengeform">
               <v-icon dark>mdi-plus</v-icon>
             </v-btn>
             <v-dialog v-model="challengeform" max-width="500px">
@@ -57,13 +51,8 @@
                     hide-details
                   ></v-slider>
 
-                  <v-subheader>
-                    Critères de réussite du défi (1 minimum, 4 maximum)
-                  </v-subheader>
-                  <v-text-field
-                    label="Critère 1"
-                    :rules="criteremini"
-                  ></v-text-field>
+                  <v-subheader>Critères de réussite du défi (1 minimum, 4 maximum)</v-subheader>
+                  <v-text-field label="Critère 1" :rules="criteremini"></v-text-field>
                   <v-text-field label="Critère 2"></v-text-field>
                   <v-text-field label="Critère 3"></v-text-field>
                   <v-text-field label="Critère 4"></v-text-field>
@@ -71,9 +60,11 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="challengeform = false"
-                    >Submit</v-btn
-                  >
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="challengeform = false; triggerAddChallengeAction"
+                  >Submit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -88,28 +79,25 @@
               @click="goToChallenge"
             >
               <v-list-item-icon>
-                <v-icon v-if="challenge.favorite" color="amber darken-1"
-                  >mdi-star</v-icon
-                >
+                <v-icon v-if="challenge.favorite" color="amber darken-1">mdi-star</v-icon>
                 <v-icon v-else>mdi-star</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="challenge.name"></v-list-item-title>
               </v-list-item-content>
               <div v-if="challenge.doneBy && challenge.doneBy.length <= 3">
-                <v-list-item-avatar
-                  v-for="(user, index2) in challenge.doneBy"
-                  :key="index2"
-                >
+                <v-list-item-avatar v-for="(user, index2) in challenge.doneBy" :key="index2">
                   <v-img :src="getUser(user).avatar"></v-img>
                 </v-list-item-avatar>
               </div>
               <div v-if="challenge.doneBy && challenge.doneBy.length > 3">
                 <v-badge overlap right>
                   <template v-slot:badge>
-                    <span v-if="challenge.doneBy">{{
+                    <span v-if="challenge.doneBy">
+                      {{
                       challenge.doneBy.length
-                    }}</span>
+                      }}
+                    </span>
                   </template>
                   <v-avatar size="36">
                     <v-img :src="getUser(challenge.doneBy[0]).avatar"></v-img>
@@ -127,15 +115,15 @@
 
 <script>
 import AddChallenge from '@/components/AddChallenge'
-import { mapGetters, mapState } from 'vuex'
+import { mapMutations, mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   components: { AddChallenge },
 
   data: () => ({
     criteremini: [
-      value => !!value || 'Requis.',
-      value => (value && value.length >= 3) || 'Min 3 caractères'
+      (value) => !!value || 'Requis.',
+      (value) => (value && value.length >= 3) || 'Min 3 caractères',
     ],
     slider: 1,
     challengeform: false,
@@ -144,79 +132,73 @@ export default {
         name: 'Les 1000 kms',
         favorite: false,
         points: 1000,
-        doneBy: [1, 2, 4]
+        doneBy: [1, 2, 4],
       },
       {
         name: 'Cocombre & vaseline',
         favorite: true,
         points: 850,
-        doneBy: [1, 2, 3, 4]
+        doneBy: [1, 2, 3, 4],
       },
       {
         name: 'Resto avec un invité',
         favorite: false,
         points: 500,
-        doneBy: [2]
+        doneBy: [2],
       },
       {
         name: 'Nu comme un ver',
         favorite: false,
         points: 600,
-        doneBy: []
-      }
+        doneBy: [],
+      },
     ],
     users: [
       {
         userId: 1,
         icon: true,
         title: 'Jason Oner',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
       },
       {
         userId: 2,
         title: 'Travis Howard',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
       },
       {
         userId: 3,
         title: 'Ali Connors',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg'
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
       },
       {
         userId: 4,
         title: 'Cindy Baker',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
-      }
-    ]
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+      },
+    ],
   }),
+
   computed: {
     ...mapGetters('authentication', ['isUserLoggedIn']),
     ...mapState('authentication', ['user']),
-    ...mapState('app', [
-      'networkOnLine',
-      'appTitle',
-      'appShortTitle',
+    ...mapState('app', ['networkOnLine', 'appTitle', 'appShortTitle']),
+    ...mapState('challenges', [
       'challengeNameToCreate',
-      'challengeCreationPending'
-    ])
+      'challengeCreationPending',
+    ]),
   },
   methods: {
+    ...mapMutations('challenges', ['setChallengeNameToCreate']),
+    ...mapActions('challenges', ['triggerAddChallengeAction']),
     goToChallenge(challenge) {
       console.log('TODO goToChallenge ', challenge)
     },
-
-    /* Simon Essai d'ajout de bouton pour ajouter un défi */
-
-    /* goToAddChallenge(challenge) {
-      console.log('TODO goToAddChallenge ', challenge)
-      alert(`Ajouter un formulaire d'ajout de challenge`)
-    }, */
 
     getUser(num) {
       let returnUser = {
         userId: 0,
         title: 'John DO',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
       }
       for (let index = 0; index < this.users.length; index += 1) {
         if (num === this.users[index].userId) {
@@ -224,8 +206,8 @@ export default {
         }
       }
       return returnUser
-    }
-  }
+    },
+  },
 }
 </script>
 
