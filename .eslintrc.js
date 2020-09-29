@@ -18,9 +18,24 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-return-assign': 'off',
     'no-var': 2,
-    'prefer-const': 2
+    'prefer-const': 2,
+    'quotes': [
+      'error',
+      'single'
+    ],
+    'eol-last': [
+      'error',
+      'always'
+    ],
+    'indent': [
+      'error',
+      2
+    ]
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    allowImportExportEverywhere: true,
+    ecmaVersion: 2019
   }
 }

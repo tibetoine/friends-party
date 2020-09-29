@@ -1,0 +1,26 @@
+{
+	"Vuex Computed Getter and Setter ": {
+		"scope": "javascript,typescript,vue",
+		"prefix": "cgset",
+		"body": [
+			"${2:property}: {",
+			"\tget() {",
+			"\t\treturn this.\\$store.state.${1:objet}.${2:property}",
+			"\t},",
+			"\tset(value) {",
+			"\t\tthis.\\$store.commit('update${1/^(.)(.*)/${1:/upcase}${2}/}${2/^(.)(.*)/${1:/upcase}${2}/}', value)",
+			"\t}",
+			"}"
+		],
+		"description": "Generate vuex getter and setter for an object and a property"
+	},
+	"Vuex Mutation Setter ": {
+		"scope": "javascript,typescript,vue",
+		"prefix": "mset",
+		"body": [
+			"set${1/^(.)(.*)/${1:/upcase}${2}/}${2/^(.)(.*)/${1:/upcase}${2}/}: (state, ${2/(.*)/${1:/downcase}/}) =>",
+			"(state.${1/(.*)/${1:/downcase}/}.${2/(.*)/${1:/downcase}/} = ${2/(.*)/${1:/downcase}/}),"
+		],
+		"description": "Generate vuex getter and setter for an object and a property"
+	},
+}

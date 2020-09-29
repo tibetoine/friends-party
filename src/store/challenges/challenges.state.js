@@ -1,4 +1,10 @@
 export default {
+  challengeToCreate: {
+    title: '',
+    description: '',
+    points: '',
+    successCriteria: []
+  },
   challenges: [],
   challengeNameToCreate: '',
   challengeDefinition: '',

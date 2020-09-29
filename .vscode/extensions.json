@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "octref.vetur",
+    "formulahendry.code-runner"
+  ]
+}

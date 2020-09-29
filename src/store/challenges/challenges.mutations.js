@@ -1,7 +1,9 @@
 export default {
   /* Challenge input name */
-  setChallengeNameToCreate: (state, challengeNameToCreate) =>
-    (state.challengeNameToCreate = challengeNameToCreate),
+  updateChallengeToCreateTitle: (state, title) =>
+    (state.challengeToCreate.title = title),
+  updateChallengeToCreateDescription: (state, description) =>
+    (state.challengeToCreate.description = description),
 
   /* Challenges */
   setChallenges: (state, challenges) => (state.challenges = challenges),

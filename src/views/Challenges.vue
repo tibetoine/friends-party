@@ -1,5 +1,5 @@
 <template>
-  <v-container offset-md4 style="margin-top: 50px;">
+  <v-container offset-md4 style="margin-top: 50px">
     <v-layout>
       <v-flex xs12 offset-lg3 offset-xl2>
         <v-card>
@@ -11,20 +11,28 @@
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
             <!-- Simon Essai d'ajout de bouton pour ajouter un défi -->
-            <v-btn class="mx-2" fab dark color="indigo" @click="challengeform = !challengeform">
+            <v-btn
+              class="mx-2"
+              fab
+              dark
+              color="indigo"
+              @click="challengeform = !challengeform"
+            >
               <v-icon dark>mdi-plus</v-icon>
             </v-btn>
             <v-dialog v-model="challengeform" max-width="500px">
               <v-card>
                 <v-container fluid>
                   <v-text-field
+                    v-model="title"
                     label="Titre du défi"
-                    :value="challengeNameToCreate"
-                    @input="setChallengeNameToCreate($event.target.value)"
                   ></v-text-field>
 
                   <v-textarea
+                    v-model="description"
                     name="input"
+                    auto-grow
+                    filled
                     label="Description du défi"
                     value="Mais c'est complétement GUEDIN !"
                     hint="Décrivez le défi"
@@ -51,8 +59,14 @@
                     hide-details
                   ></v-slider>
 
-                  <v-subheader>Critères de réussite du défi (1 minimum, 4 maximum)</v-subheader>
-                  <v-text-field label="Critère 1" :rules="criteremini"></v-text-field>
+                  <v-subheader
+                    >Critères de réussite du défi (1 minimum, 4
+                    maximum)</v-subheader
+                  >
+                  <v-text-field
+                    label="Critère 1"
+                    :rules="criteremini"
+                  ></v-text-field>
                   <v-text-field label="Critère 2"></v-text-field>
                   <v-text-field label="Critère 3"></v-text-field>
                   <v-text-field label="Critère 4"></v-text-field>
@@ -63,8 +77,12 @@
                   <v-btn
                     text
                     color="primary"
-                    @click="challengeform = false; triggerAddChallengeAction"
-                  >Submit</v-btn>
+                    @click="
+                      challengeform = false
+                      triggerAddChallengeAction
+                    "
+                    >Submit</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -79,14 +97,19 @@
               @click="goToChallenge"
             >
               <v-list-item-icon>
-                <v-icon v-if="challenge.favorite" color="amber darken-1">mdi-star</v-icon>
+                <v-icon v-if="challenge.favorite" color="amber darken-1"
+                  >mdi-star</v-icon
+                >
                 <v-icon v-else>mdi-star</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="challenge.name"></v-list-item-title>
               </v-list-item-content>
               <div v-if="challenge.doneBy && challenge.doneBy.length <= 3">
-                <v-list-item-avatar v-for="(user, index2) in challenge.doneBy" :key="index2">
+                <v-list-item-avatar
+                  v-for="(user, index2) in challenge.doneBy"
+                  :key="index2"
+                >
                   <v-img :src="getUser(user).avatar"></v-img>
                 </v-list-item-avatar>
               </div>
@@ -94,9 +117,7 @@
                 <v-badge overlap right>
                   <template v-slot:badge>
                     <span v-if="challenge.doneBy">
-                      {{
-                      challenge.doneBy.length
-                      }}
+                      {{ challenge.doneBy.length }}
                     </span>
                   </template>
                   <v-avatar size="36">
@@ -122,8 +143,8 @@ export default {
 
   data: () => ({
     criteremini: [
-      (value) => !!value || 'Requis.',
-      (value) => (value && value.length >= 3) || 'Min 3 caractères',
+      value => !!value || 'Requis.',
+      value => (value && value.length >= 3) || 'Min 3 caractères'
     ],
     slider: 1,
     challengeform: false,
@@ -132,50 +153,50 @@ export default {
         name: 'Les 1000 kms',
         favorite: false,
         points: 1000,
-        doneBy: [1, 2, 4],
+        doneBy: [1, 2, 4]
       },
       {
         name: 'Cocombre & vaseline',
         favorite: true,
         points: 850,
-        doneBy: [1, 2, 3, 4],
+        doneBy: [1, 2, 3, 4]
       },
       {
         name: 'Resto avec un invité',
         favorite: false,
         points: 500,
-        doneBy: [2],
+        doneBy: [2]
       },
       {
         name: 'Nu comme un ver',
         favorite: false,
         points: 600,
-        doneBy: [],
-      },
+        doneBy: []
+      }
     ],
     users: [
       {
         userId: 1,
         icon: true,
         title: 'Jason Oner',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
       },
       {
         userId: 2,
         title: 'Travis Howard',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
       },
       {
         userId: 3,
         title: 'Ali Connors',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg'
       },
       {
         userId: 4,
         title: 'Cindy Baker',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-      },
-    ],
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
+      }
+    ]
   }),
 
   computed: {
@@ -184,8 +205,50 @@ export default {
     ...mapState('app', ['networkOnLine', 'appTitle', 'appShortTitle']),
     ...mapState('challenges', [
       'challengeNameToCreate',
-      'challengeCreationPending',
+      'challengeCreationPending'
     ]),
+    title: {
+      get() {
+        console.log(
+          'get tiitle : ',
+          this.$store.state.challenges.challengeToCreate.title
+        )
+        return this.$store.state.challenges.challengeToCreate.title
+      },
+      set(value) {
+        this.$store.commit('challenges/updateChallengeToCreateTitle', value)
+      }
+    },
+    description: {
+      get() {
+        return this.$store.state.challenges.challengeToCreate.description
+      },
+      set(value) {
+        this.$store.commit(
+          'challenges/updateChallengeToCreateDescription',
+          value
+        )
+      }
+    },
+    points: {
+      get() {
+        return this.$store.state.challenges.challengeToCreate.points
+      },
+      set(value) {
+        this.$store.commit('challenges/updateChallengeToCreatePoints', value)
+      }
+    },
+    successCriteria: {
+      get() {
+        return this.$store.state.challengeToCreate.successCriteria
+      },
+      set(value) {
+        this.$store.commit(
+          'challenges/updateChallengeToCreateSuccessCriteria',
+          value
+        )
+      }
+    }
   },
   methods: {
     ...mapMutations('challenges', ['setChallengeNameToCreate']),
@@ -198,7 +261,7 @@ export default {
       let returnUser = {
         userId: 0,
         title: 'John DO',
-        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+        avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg'
       }
       for (let index = 0; index < this.users.length; index += 1) {
         if (num === this.users[index].userId) {
@@ -206,8 +269,8 @@ export default {
         }
       }
       return returnUser
-    },
-  },
+    }
+  }
 }
 </script>
 
